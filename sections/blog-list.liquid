@@ -1,33 +1,34 @@
 <link rel="stylesheet" href="{{ 'blog-list.css' | asset_url }}">
 
-{%  style  %} 
-.padding-{{ section.id }} {
-    padding-top: {{ section.settings.padding_top | divided_by: 2 }}px;
-    padding-bottom: {{ section.settings.padding_bottom | divided_by: 2 }}px;
+{%- style -%}
+  .section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
   }
 
-  @media (min-width: 750px) {
-    .padding-{{ section.id }} {
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }} {
       padding-top: {{ section.settings.padding_top }}px;
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
-{% endstyle %} 
-<marmeto-component-blog-list>
-  <div class="blogs padding-{{ section.id }}">
-    <div class="page-width">
-      <div class="blogs__wrapper">
-        <div class="blogs__header-section">
+{%- endstyle -%}
+
+
+<marmeto-blog-list class="section-{{ section.id }}">
+  <div class="marmeto-blog-list page-width">
+      <div class="marmeto-blog-list__wrapper">
+        <div class="marmeto-blog-list__header-section">
           {% if section.settings.heading !=blank %}
-          <h2 class="blogs__heading h0">{{ section.settings.heading }}</h2>
+          <h2 class="marmeto-blog-list__heading h0">{{ section.settings.heading }}</h2>
           {% endif %}
           {% if section.settings.button_text != blank and section.settings.button_link != blank %}
-            <div class="blogs__button">
+            <div class="marmeto-blog-list__button">
               <a href="{{ section.settings.button_link }}" ><span>{{ section.settings.button_text }}</span></a>
             </div>
           {% endif %}
         </div>
-        <div class="blogs__slider-section grid grid--3-col-desktop grid--3-col-tablet grid--2-col">
+        <div class="marmeto-blog-list__slider-section grid grid--3-col-desktop grid--3-col-tablet grid--2-col">
           {% if section.settings.blog != blank %}
             {% for article in section.settings.blog.articles %}
               <div class="grid__item">
@@ -67,13 +68,12 @@
         {% endif %}
         </div>
       </div>
-    </div>
   </div>
-</marmeto-component-blog-list>
+</marmeto-blog-list>
 
 {%  schema  %} 
   {
-    "name":"Blogs",
+    "name":"marmeto-blog-list",
     "tag": "section",
     "settings": [
       {
@@ -126,7 +126,7 @@
     
     "presets": [
       {
-        "name": "Blogs"
+        "name": "marmeto-Blog-list"
       }
     ]
   }
